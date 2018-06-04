@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Show Recipe</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <!--/*@thymesVar id="recipe" type="guru.springframework.spring5recipeapp.domain.Recipe"*/-->
+                            <h1 class="panel-title" th:text="${recipe.description}">Recipe description here!</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Categories:</h5>
+                                </div>
+                                <div class="col-md-9">
+                                    <ul>
+                                        <li th:remove="all">cat one</li>
+                                        <li th:remove="all">cat two</li>
+                                        <!--/*@thymesVar id="recipe" type="guru.springframework.spring5recipeapp.domain.Recipe"*/-->
+                                        <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}">cat three</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Prep time:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <!--/*@thymesVar id="recipe" type="guru.springframework.spring5recipeapp.domain.Recipe"*/-->
+                                    <p th:text="${(recipe.getPrepTime()) + ' Min'}">30 min</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Difficulty:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.getDifficulty()}">Easy</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Cooktime:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.getCookTime() + ' Min'}">30 min</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Servings:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.getServings()}">4</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Source:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.getSource()}">30 min</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>URL:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>
+                                        <a target="_blank" href="#"
+                                           th:href="${recipe.getUrl()}">
+                                            Recipe Url
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Ingredients</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li th:remove="all">1 Cup of milk</li>
+                                        <li th:remove="all">1 teaspoon of chocolate</li>
+                                        <!--/*@thymesVar id="recipe" type="guru.springframework.spring5recipeapp.domain.Recipe"*/-->
+                                        <li th:each="ingredient : ${recipe.getIngredients()}"
+                                            th:text="${ingredient.getAmount()
+                                                     + ' ' + ingredient.getUom().getDescription()
+                                                     + ' - ' + ingredient.getDescription()}">
+                                            1 teaspoon of sugar
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Directions</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p th:text="${recipe.getDirections()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem consequuntur
+                                            deleniti dicta dignissimos dolores facilis ipsum laborum laudantium
+                                            molestiae nulla, odit, officiis omnis pariatur quod ratione repudiandae
+                                            soluta tempore ullam, veniam vero! Id, maiores, pariatur. A consequatur
+                                            cumque debitis eos incidunt odio officiis provident ut voluptatum. Atque
+                                            dolor facilis ipsa natus quas rem repellendus ut. Adipisci aliquid, aperiam
+                                            asperiores aspernatur assumenda consectetur cumque cupiditate delectus
+                                            deserunt doloremque dolorum explicabo, facilis fugiat ipsam itaque
+                                            laboriosam laborum minima mollitia necessitatibus officia officiis ratione
+                                            repellat sit ullam ut. Architecto deserunt earum itaque mollitia porro
+                                            repellendus, ut voluptatem? Dolorum facilis in magnam quod rem!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Notes</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p th:text="${recipe.getNotes().getRecipeNotes()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem consequuntur
+                                        deleniti dicta dignissimos dolores facilis ipsum laborum laudantium
+                                        molestiae nulla, odit, officiis omnis pariatur quod ratione repudiandae
+                                        soluta tempore ullam, veniam vero! Id, maiores, pariatur. A consequatur
+                                        cumque debitis eos incidunt odio officiis provident ut voluptatum. Atque
+                                        dolor facilis ipsa natus quas rem repellendus ut. Adipisci aliquid, aperiam
+                                        asperiores aspernatur assumenda consectetur cumque cupiditate delectus
+                                        deserunt doloremque dolorum explicabo, facilis fugiat ipsam itaque
+                                        laboriosam laborum minima mollitia necessitatibus officia officiis ratione
+                                        repellat sit ullam ut. Architecto deserunt earum itaque mollitia porro
+                                        repellendus, ut voluptatem? Dolorum facilis in magnam quod rem!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+            th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</body>
+</html>
