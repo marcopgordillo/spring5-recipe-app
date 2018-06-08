@@ -10,7 +10,7 @@ public class CategoryTest {
     Category category;
 
     @Before
-    public void setUp() {
+    public void setUp(){
         category = new Category();
     }
 
@@ -19,14 +19,16 @@ public class CategoryTest {
         Long idValue = 4L;
 
         category.setId(idValue);
+
         assertEquals(idValue, category.getId());
     }
 
     @Test
-    public void getDescription() {
+    public void getDescription() throws Exception {
     }
 
     @Test
-    public void getRecipes() {
+    public void getRecipes() throws Exception {
     }
+
 }
