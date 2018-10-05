@@ -11,6 +11,7 @@ public class NotFoundException extends RuntimeException {
      * initialized by a call to {@link #initCause}.
      */
     public NotFoundException() {
+        super();
     }
 
     /**
